@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class Card : MonoBehaviour, IPointerClickHandler
+public class Card : MonoBehaviour 
 {
     [SerializeField] CardType cardType;
     [SerializeField] CardNumber cardNumber;
@@ -52,6 +52,12 @@ public class Card : MonoBehaviour, IPointerClickHandler
         onPriorityIncreased?.Invoke(currentPriority);
     }
 
+    public void IncreasePriority(int increaseValue)
+    {
+        currentPriority = Mathf.Min(maxPriority,increaseValue) ;
+        onPriorityIncreased?.Invoke(currentPriority);
+    }
+
     public CardType GetCardType()
     {
         return cardType;
@@ -74,11 +80,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
         onCardNumberChanged?.Invoke(newCardNumber);
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        onCardSelected.Invoke();
-        Debug.Log("Card selected");
-    }
+  
 
     public void ToggleSelectable(bool isSelectable)
     {

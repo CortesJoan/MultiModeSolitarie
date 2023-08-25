@@ -32,9 +32,13 @@ public class SolitarieCardGenerator : MonoBehaviour, IGameGenerator
             {
                 var c = currentRowCards[index];
                 c.Hide();
+                c.ToggleSelectable(false);
+                c.IncreasePriority(index+1);
             }
-            currentRowCards[^1].Show(); 
-            currentRowCards[^1].SetMaxPriority();
+            var lastCard = currentRowCards[^1];
+            lastCard.Show();
+            lastCard.ToggleSelectable(true);
+            lastCard.SetMaxPriority();
 
             remainingCards -= cardsPerRow;
         }

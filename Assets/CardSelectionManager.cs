@@ -84,41 +84,46 @@ public class CardSelectionManager : MonoBehaviour
         }
         Vector2 mousePosition= Mouse.current.position.ReadValue();
 
-        RaycastHit2D hit = Physics2D.Raycast(mainCamera.ScreenToWorldPoint(mousePosition), Vector2.zero);
-        if (hit.collider != null)
+        RaycastHit2D[] hits = Physics2D.RaycastAll(mainCamera.ScreenToWorldPoint(mousePosition), Vector2.zero);
+        foreach (var hit in hits)
         {
-            //todo move to interface
-            PileOfCards pileOfCards =  hit.collider.GetComponentInParent<PileOfCards>();
-            if (pileOfCards != null)
+             
+            if (hit.collider != null)
             {
-                pileOfCards.ShowNextCard();
-                return;
-            }
-            Card card = hit.collider.GetComponentInParent<Card>();
-            if (card==null||  !card.CanBeSelected())
-            {
-                return;
-            }
+                //todo move to interface
+                PileOfCards pileOfCards =  hit.collider.GetComponentInParent<PileOfCards>();
+                if (pileOfCards != null)
+                {
+                    pileOfCards.ShowNextCard();
+                    return;
+                }
+                Card card = hit.collider.GetComponentInParent<Card>();
+                if (card==null||  !card.CanBeSelected())
+                {
+                    return;
+                }
            
             
             
-            SlotCardAttacher slotCardAttacherOfCurrentCard = card.GetComponentInParent<SlotCardAttacher>();
-            Debug.Assert(slotCardAttacherOfCurrentCard != null, $"Invalid slotCardAttacherOfCurrentCard");
-            slotCardAttacherFrom = slotCardAttacherOfCurrentCard;
-            if (slotCardAttacherFrom != null)
-            {
-                dragging = true;
-                selectedCards = slotCardAttacherFrom.GetAttachedCards();
+                SlotCardAttacher slotCardAttacherOfCurrentCard = card.GetComponentInParent<SlotCardAttacher>();
+                Debug.Assert(slotCardAttacherOfCurrentCard != null, $"Invalid slotCardAttacherOfCurrentCard");
+                slotCardAttacherFrom = slotCardAttacherOfCurrentCard;
+                if (slotCardAttacherFrom != null)
+                {
+                    dragging = true;
+                    selectedCards = slotCardAttacherFrom.GetAttachedCards();
 
-                playerCardManager.SelectCard(card);
+                    playerCardManager.SelectCard(card);
 
-                Vector3 cardPosition = card.transform.position;
-                Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x,
-                    mousePosition.y, -mainCamera.transform.position.z));
-                offset = cardPosition - new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, cardPosition.z);
-                isSelectingCards = true;
-            }
+                    Vector3 cardPosition = card.transform.position;
+                    Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x,
+                        mousePosition.y, -mainCamera.transform.position.z));
+                    offset = cardPosition - new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, cardPosition.z);
+                    isSelectingCards = true;
+                }
+            }     
         }
+  
     }
 
     public void OnCardUnSelected(InputAction.CallbackContext context)

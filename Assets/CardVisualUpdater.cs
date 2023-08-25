@@ -39,8 +39,7 @@ public class CardVisualUpdater : MonoBehaviour
     public void OnShowCard()
     {
         spriteRenderer.sprite = lastShowedCard;
-        spriteRenderer.sortingOrder = 1;
-    }
+     }
 
     public void OnPriorityDecreased(int newPriority)
     {
