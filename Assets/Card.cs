@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class Card : MonoBehaviour 
+public class Card : MonoBehaviour
 {
     [SerializeField] CardType cardType;
     [SerializeField] CardNumber cardNumber;
@@ -12,13 +12,15 @@ public class Card : MonoBehaviour
     public UnityEvent<CardType> onCardTypeChanged;
     public UnityEvent onCardHided;
     public UnityEvent onCardShowed;
-   public UnityEvent onCardSelected;
+    public UnityEvent onCardIsSelected;
+    public UnityEvent onCardIsUnSelected;
     public UnityEvent<CardNumber> onCardNumberChanged;
-    [SerializeField] private bool cardIsSelectable=true;
+    [SerializeField] private bool cardIsSelectable = true;
     public UnityEvent<int> onPriorityIncreased;
     public UnityEvent<int> onPriorityDecreased;
-   [SerializeField] public int currentPriority=0;
-    private const int maxPriority=10;
+    [SerializeField] private int currentPriority = 0;
+    private const int maxPriority = 10;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,10 +56,23 @@ public class Card : MonoBehaviour
 
     public void IncreasePriority(int increaseValue)
     {
-        currentPriority = Mathf.Min(maxPriority,increaseValue) ;
+        currentPriority = Mathf.Min(maxPriority, increaseValue);
         onPriorityIncreased?.Invoke(currentPriority);
     }
 
+    public void RestorePriority()
+    {
+        if (currentPriority>0)
+        {
+            currentPriority = 1;
+            onPriorityDecreased?.Invoke(currentPriority);
+        }
+        else
+        {
+            currentPriority = 1;
+            onPriorityIncreased?.Invoke(currentPriority);
+        }
+    }
     public CardType GetCardType()
     {
         return cardType;
@@ -80,12 +95,10 @@ public class Card : MonoBehaviour
         onCardNumberChanged?.Invoke(newCardNumber);
     }
 
-  
 
     public void ToggleSelectable(bool isSelectable)
     {
         cardIsSelectable = isSelectable;
-        
     }
 
     public bool CanBeSelected()

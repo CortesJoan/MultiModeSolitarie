@@ -55,4 +55,8 @@ public class CardVisualUpdater : MonoBehaviour
     {
         spriteRenderer.color = Color.yellow;
     }
+    public void OnCardUnSelected()
+    {
+        spriteRenderer.color = Color.white;
+    }
 }

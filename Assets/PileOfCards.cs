@@ -32,21 +32,27 @@ public class PileOfCards : MonoBehaviour
                 Card previousCard = currentPileOfCards[currentShowingCard];
                 previousCard.DecreasePriority();
                 showedPileSlot.DeAttachCard(previousCard);
-
             }
             currentShowingCard++;
-            Debug.Log("Showing card" + currentShowingCard);
-            var currentCard = currentPileOfCards[currentShowingCard];
-
-
-            currentCard.Show();
-            currentCard.transform.parent = showedPileSlot.transform;
- 
-            showedPileSlot.AttachCard(currentCard);
-            currentCard.transform.localPosition = Vector3.zero;
+            ShowCard(currentShowingCard);
         }
     }
 
+    private void ShowCard(int cardNumber)
+    {      
+        currentShowingCard = cardNumber;
+        Debug.Log("Showing card" + currentShowingCard);
+
+        var currentCard = currentPileOfCards[currentShowingCard];
+
+
+        currentCard.Show();
+        currentCard.transform.parent = showedPileSlot.transform;
+
+        showedPileSlot.AttachCard(currentCard);
+        currentCard.transform.localPosition = Vector3.zero;
+
+    }
     public void ClosePileOfCards()
     {
         currentShowingCard = -1;
@@ -54,8 +60,18 @@ public class PileOfCards : MonoBehaviour
         {
             card.transform.parent = transform;
             card.transform.localPosition = Vector3.zero;
+            card.RestorePriority();
             card.Hide();
             showedPileSlot.DeAttachCard(card);
         }
+    }
+
+    public void ShowPreviousCard()
+    {
+        if (currentShowingCard>0)
+        {
+            ShowCard(currentShowingCard-1);
+        }
+      
     }
 }

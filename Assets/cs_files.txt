@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class Card : MonoBehaviour, IPointerClickHandler
+public class Card : MonoBehaviour 
 {
     [SerializeField] CardType cardType;
     [SerializeField] CardNumber cardNumber;
@@ -13,10 +13,13 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public UnityEvent<CardType> onCardTypeChanged;
     public UnityEvent onCardHided;
     public UnityEvent onCardShowed;
-    public UnityEvent onPriorityDecreased;
-    public UnityEvent onCardSelected;
+   public UnityEvent onCardSelected;
     public UnityEvent<CardNumber> onCardNumberChanged;
     [SerializeField] private bool cardIsSelectable=true;
+    public UnityEvent<int> onPriorityIncreased;
+    public UnityEvent<int> onPriorityDecreased;
+   [SerializeField] public int currentPriority=0;
+    private const int maxPriority=10;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +42,21 @@ public class Card : MonoBehaviour, IPointerClickHandler
 
     public void DecreasePriority()
     {
-        onPriorityDecreased?.Invoke();
+        currentPriority--;
+        onPriorityDecreased?.Invoke(currentPriority);
+    }
+
+    [ContextMenu(nameof(SetMaxPriority))]
+    public void SetMaxPriority()
+    {
+        currentPriority = maxPriority;
+        onPriorityIncreased?.Invoke(currentPriority);
+    }
+
+    public void IncreasePriority(int increaseValue)
+    {
+        currentPriority = Mathf.Min(maxPriority,increaseValue) ;
+        onPriorityIncreased?.Invoke(currentPriority);
     }
 
     public CardType GetCardType()
@@ -64,16 +81,17 @@ public class Card : MonoBehaviour, IPointerClickHandler
         onCardNumberChanged?.Invoke(newCardNumber);
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        onCardSelected.Invoke();
-        Debug.Log("Card selected");
-    }
+  
 
     public void ToggleSelectable(bool isSelectable)
     {
         cardIsSelectable = isSelectable;
         
+    }
+
+    public bool CanBeSelected()
+    {
+        return cardIsSelectable;
     }
 }
 
@@ -176,6 +194,9 @@ public class CardNumberCondition : SlotConditions
     }
 } 
 File: CardSelectionManager.cs 
+using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -183,10 +204,13 @@ public class CardSelectionManager : MonoBehaviour
 {
     [SerializeField] private PlayerInput playerInput;
     private Camera mainCamera;
-    private Card selectedCard;
+    private List<Card> selectedCards;
+    private SlotCardAttacher slotCardAttacherTarget;
+    private SlotCardAttacher slotCardAttacherFrom;
     private Vector3 offset;
     private bool dragging;
-  [SerializeField]  private PlayerCardManager playerCardManager;
+    [SerializeField] private PlayerCardManager playerCardManager;
+
     private void Awake()
     {
         mainCamera = Camera.main;
@@ -220,54 +244,119 @@ public class CardSelectionManager : MonoBehaviour
         }
         else if (context.action.name == "CardSelected")
         {
-            OnCardSelected(context);
+            //         OnCardSelected(context);
         }
     }
 
     private void OnMousePositionChanged(InputAction.CallbackContext context)
     {
-        if (!dragging || selectedCard == null) return;
+        if (!dragging || selectedCards.Count == 0) return;
 
         Vector2 mousePosition = context.ReadValue<Vector2>();
-        Vector3 worldMousePosition = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, -mainCamera.transform.position.z));
-        selectedCard.transform.position = new Vector3(worldMousePosition.x + offset.x, worldMousePosition.y + offset.y, selectedCard.transform.position.z);
+        Vector3 worldMousePosition =
+            mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y,
+                -mainCamera.transform.position.z));
+        var followCard = selectedCards.First().transform;
+
+        followCard.position = new Vector3(worldMousePosition.x + offset.x, worldMousePosition.y + offset.y,
+            followCard.position.z);
     }
 
     private void OnArrowKeysChanged(InputAction.CallbackContext context)
     {
-        if (dragging || selectedCard == null) return;
+        if (!dragging || selectedCards.Count == 0) return;
 
         Vector2 arrowKeys = context.ReadValue<Vector2>();
         // Implement logic for moving the selected card to the next available position using arrow keys
     }
 
-    private void OnCardSelected(InputAction.CallbackContext context)
+    private bool isSelectingCards = false;
+
+    public void OnCardSelected(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (!context.performed)
         {
-            RaycastHit2D hit = Physics2D.Raycast(mainCamera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            return;
+        }
+        Vector2 mousePosition= Mouse.current.position.ReadValue();
+
+        RaycastHit2D[] hits = Physics2D.RaycastAll(mainCamera.ScreenToWorldPoint(mousePosition), Vector2.zero);
+        foreach (var hit in hits)
+        {
+             
             if (hit.collider != null)
             {
+                //todo move to interface
+                PileOfCards pileOfCards =  hit.collider.GetComponentInParent<PileOfCards>();
+                if (pileOfCards != null)
+                {
+                    pileOfCards.ShowNextCard();
+                    return;
+                }
                 Card card = hit.collider.GetComponentInParent<Card>();
-                if (card != null)
+                if (card==null||  !card.CanBeSelected())
+                {
+                    return;
+                }
+           
+            
+            
+                SlotCardAttacher slotCardAttacherOfCurrentCard = card.GetComponentInParent<SlotCardAttacher>();
+                Debug.Assert(slotCardAttacherOfCurrentCard != null, $"Invalid slotCardAttacherOfCurrentCard");
+                slotCardAttacherFrom = slotCardAttacherOfCurrentCard;
+                if (slotCardAttacherFrom != null)
                 {
                     dragging = true;
-                    selectedCard = card;
-                    playerCardManager.SelectCard(card); // Call the SelectCard method from PlayerCardManager
+                    selectedCards = slotCardAttacherFrom.GetAttachedCards();
+
+                    playerCardManager.SelectCard(card);
 
                     Vector3 cardPosition = card.transform.position;
-                    Vector2 mousePosition = context.ReadValue<Vector2>();
-                    Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, -mainCamera.transform.position.z));
+                    Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x,
+                        mousePosition.y, -mainCamera.transform.position.z));
                     offset = cardPosition - new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, cardPosition.z);
+                    isSelectingCards = true;
                 }
-            }
+            }     
         }
-        else if (context.canceled)
+  
+    }
+
+    public void OnCardUnSelected(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+        {
+            return;
+        }
+        if (isSelectingCards)
         {
             dragging = false;
-            selectedCard = null;
-            playerCardManager.UnSelectCard(selectedCard); // Call the UnSelectCard method from PlayerCardManager
 
+            if (slotCardAttacherTarget != null)
+            {
+                for (var index = selectedCards.Count - 1; index >= 0; index--)
+                {
+                    var card = selectedCards[index];
+                    slotCardAttacherTarget.AttachCard(card);
+                    playerCardManager.UnSelectCard(card);
+                }
+
+                slotCardAttacherTarget = null;
+            }
+            else
+            {
+                for (var index = selectedCards.Count - 1; index >= 0; index--)
+                {
+                    var card = selectedCards[index];
+                    slotCardAttacherFrom.AttachCard(card);
+                    playerCardManager.UnSelectCard(card);
+                }
+
+                slotCardAttacherFrom = null;
+            }
+
+            selectedCards = new List<Card>();
+            isSelectingCards = false;
         }
     }
 } 
@@ -313,18 +402,21 @@ public class CardVisualUpdater : MonoBehaviour
     public void OnShowCard()
     {
         spriteRenderer.sprite = lastShowedCard;
-        spriteRenderer.sortingOrder = 1;
+     }
+
+    public void OnPriorityDecreased(int newPriority)
+    {
+        spriteRenderer.sortingOrder = newPriority;
     }
 
-    public void OnPriorityDecreased()
+    public void OnPriorityIncreased(int newPriority)
     {
-        spriteRenderer.sortingOrder--;
+        spriteRenderer.sortingOrder = newPriority;
     }
 
     public void OnCardSelected()
     {
         spriteRenderer.color = Color.yellow;
-        
     }
 } 
 File: Condition.cs 
@@ -360,11 +452,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PileOfCards : MonoBehaviour, IPointerDownHandler , IPointerClickHandler
+public class PileOfCards : MonoBehaviour
 {
     [SerializeField] List<Card> currentPileOfCards;
     int currentShowingCard = -1;
-    [SerializeField] private Transform showedPileSlot;
+    [SerializeField] private SlotCardAttacher showedPileSlot;
 
     public void SetPileOfCards(List<Card> newPileOfCards)
     {
@@ -378,24 +470,29 @@ public class PileOfCards : MonoBehaviour, IPointerDownHandler , IPointerClickHan
 
     public void ShowNextCard()
     {
-        if ((currentShowingCard+1) >= currentPileOfCards.Count)
+        if ((currentShowingCard + 1) >= currentPileOfCards.Count)
         {
             ClosePileOfCards();
         }
         else
         {
-            if (currentShowingCard!=-1)
+            if (currentShowingCard != -1)
             {
-                currentPileOfCards[currentShowingCard].DecreasePriority();
+                Card previousCard = currentPileOfCards[currentShowingCard];
+                previousCard.DecreasePriority();
+                showedPileSlot.DeAttachCard(previousCard);
+
             }
             currentShowingCard++;
-            Debug.Log("Showing card" +currentShowingCard);
-            var currnetCard = currentPileOfCards[currentShowingCard];
-            
-            
-            currnetCard.Show();
-            currnetCard.transform.parent = showedPileSlot.transform;
-            currnetCard.transform.localPosition = Vector3.zero;
+            Debug.Log("Showing card" + currentShowingCard);
+            var currentCard = currentPileOfCards[currentShowingCard];
+
+
+            currentCard.Show();
+            currentCard.transform.parent = showedPileSlot.transform;
+ 
+            showedPileSlot.AttachCard(currentCard);
+            currentCard.transform.localPosition = Vector3.zero;
         }
     }
 
@@ -407,20 +504,8 @@ public class PileOfCards : MonoBehaviour, IPointerDownHandler , IPointerClickHan
             card.transform.parent = transform;
             card.transform.localPosition = Vector3.zero;
             card.Hide();
+            showedPileSlot.DeAttachCard(card);
         }
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-         Debug.Log("pointerdownpileofcards");
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
- 
-        ShowNextCard();
-        Debug.Log("Showed next card");
-        
     }
 } 
 File: PlayerCardManager.cs 
@@ -497,9 +582,9 @@ public class PlayerCardManagerVisuals : MonoBehaviour
 
     }
 
-    public void UpdatePointerPosition(InputValue value)
+    public void UpdatePointerPosition(InputAction.CallbackContext context)  
     {
-        pointerPosition=  value.Get<Vector2>();
+        pointerPosition=  context.ReadValue<Vector2>();
     }
 } 
 File: SlotCardAttacher.cs 
@@ -509,7 +594,7 @@ using UnityEngine;
 
 public class SlotCardAttacher : MonoBehaviour
 {
-    List<Card> attachedCards = new List<Card>();
+  [SerializeField]  List<Card> attachedCards = new List<Card>();
     [SerializeField] private List<SlotConditions> slotConditions = new List<SlotConditions>();
 
     void Start()
@@ -525,18 +610,23 @@ public class SlotCardAttacher : MonoBehaviour
     {
         if (slotConditions.TrueForAll(a=>a.IsConditionMet()))
         {
-            
+            attachedCards.Add(card);
+
         }
-        attachedCards.Add(card);
     }
 
     public void DeAttachCard(Card card)
     {
         attachedCards.Remove(card);
     }
+
+    public List<Card> GetAttachedCards()
+    {
+        return attachedCards;
+    }
 }
 
-public class SlotConditions : Condition
+public class SlotConditions : Condition 
 {
     protected Card cardToCheck;
     public override bool IsConditionMet()
@@ -552,6 +642,7 @@ public class SlotConditions : Condition
 File: SolitaireLayout.cs 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SolitaireLayout : MonoBehaviour
@@ -588,17 +679,15 @@ public class SolitaireLayout : MonoBehaviour
 
         for (int i = 0; i < layoutInstantiatedSlots.Count; i++)
         {
-            GameObject layout = layoutInstantiatedSlots[i];
+            GameObject layoutSlot = layoutInstantiatedSlots[i];
             float currentSeparation = 0;
             foreach (Card card in cards[i])
             {
-                card.transform.SetParent(layout.transform);
+                card.transform.SetParent(layoutSlot.transform);
                 card.transform.localPosition = Vector3.down * currentSeparation;
                 currentSeparation += cardYSeparation;
             }
-        }
-
-
+         }
     }
     public int GetRows()
     {
@@ -637,7 +726,18 @@ public class SolitarieCardGenerator : MonoBehaviour, IGameGenerator
             FillVoidCards(ref currentRowCards, cardsPerRow);
             cardsPerRow++;
             generatedCards.Add(currentRowCards);
-            currentRowCards.ForEach((c) => c.Hide());
+            for (var index = 0; index < currentRowCards.Count - 1; index++)
+            {
+                var c = currentRowCards[index];
+                c.Hide();
+                c.ToggleSelectable(false);
+                c.IncreasePriority(index+1);
+            }
+            var lastCard = currentRowCards[^1];
+            lastCard.Show();
+            lastCard.ToggleSelectable(true);
+            lastCard.SetMaxPriority();
+
             remainingCards -= cardsPerRow;
         }
 
