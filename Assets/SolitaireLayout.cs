@@ -24,7 +24,7 @@ public class SolitaireLayout : MonoBehaviour
         {
             GameObject instantiatedEmptySlot = Instantiate(emptySlotPrefab, this.transform);
             instantiatedEmptySlot.transform.localPosition = new Vector3(recorredSpace, 0, 0);
-
+            instantiatedEmptySlot.name += i;
             layoutInstantiatedSlots.Add(instantiatedEmptySlot);
 
             recorredSpace += spaceBetweenRows;
@@ -37,16 +37,19 @@ public class SolitaireLayout : MonoBehaviour
 
         for (int i = 0; i < layoutInstantiatedSlots.Count; i++)
         {
-            GameObject layoutSlot = layoutInstantiatedSlots[i];
+            SlotCardAttacher layoutSlot = layoutInstantiatedSlots[i].GetComponent<SlotCardAttacher>();
             float currentSeparation = 0;
+            layoutSlot.SetAttachedCardsDistance(cardYSeparation);
             foreach (Card card in cards[i])
             {
-                card.transform.SetParent(layoutSlot.transform);
-                card.transform.localPosition = Vector3.down * currentSeparation;
-                currentSeparation += cardYSeparation;
+                layoutSlot.AttachCard(card);
+                
             }
-         }
+            layoutSlot.CheckSlotConditions(cards[i].Last());
+
+        }
     }
+
     public int GetRows()
     {
         return rows;

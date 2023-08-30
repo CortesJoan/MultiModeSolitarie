@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 1770142284647389182}
   - component: {fileID: 4906519403267626743}
   - component: {fileID: -8744845943203712251}
+  - component: {fileID: -799828363824200362}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -240,6 +241,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+  onCardTriggeredCollider:
+    m_PersistentCalls:
+      m_Calls: []
   onCardNumberChanged:
     m_PersistentCalls:
       m_Calls:
@@ -287,6 +291,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 1
   currentPriority: 0
+  isShowed: 0
 --- !u!114 &-8744845943203712251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +310,33 @@ MonoBehaviour:
   visualDataBank: {fileID: 0}
   hideSprite: {fileID: 2054499239, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
   lastShowedCard: {fileID: 0}
+--- !u!50 &-799828363824200362
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770142284647389181}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1 &4718334422324069447
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +430,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0023242533, y: -0.004648328}

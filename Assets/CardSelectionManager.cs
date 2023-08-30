@@ -8,7 +8,7 @@ public class CardSelectionManager : MonoBehaviour
 {
     [SerializeField] private PlayerInput playerInput;
     private Camera mainCamera;
-    private List<Card> selectedCards;
+    [SerializeField] private List<Card> selectedCards;
     private SlotCardAttacher slotCardAttacherTarget;
     private SlotCardAttacher slotCardAttacherFrom;
     private Vector3 offset;
@@ -78,52 +78,61 @@ public class CardSelectionManager : MonoBehaviour
 
     public void OnCardSelected(InputAction.CallbackContext context)
     {
-        if (!context.performed)
+        if (!context.performed || isSelectingCards)
         {
             return;
         }
-        Vector2 mousePosition= Mouse.current.position.ReadValue();
+        Vector2 mousePosition = Mouse.current.position.ReadValue();
 
-        RaycastHit2D[] hits = Physics2D.RaycastAll(mainCamera.ScreenToWorldPoint(mousePosition), Vector2.zero);
-        foreach (var hit in hits)
+        RaycastHit2D hit = Physics2D.Raycast(mainCamera.ScreenToWorldPoint(mousePosition), Vector2.zero);
+        Debug.DrawRay(mainCamera.ScreenToWorldPoint(mousePosition), Vector2.zero);
+        if (hit.collider != null)
         {
-             
-            if (hit.collider != null)
+            Debug.Log(hit.collider.name, hit.collider.gameObject);
+            //todo move to interface
+            PileOfCards pileOfCards = hit.collider.GetComponentInParent<PileOfCards>();
+            if (pileOfCards != null)
             {
-                //todo move to interface
-                PileOfCards pileOfCards =  hit.collider.GetComponentInParent<PileOfCards>();
-                if (pileOfCards != null)
-                {
-                    pileOfCards.ShowNextCard();
-                    return;
-                }
-                Card card = hit.collider.GetComponentInParent<Card>();
-                if (card==null||  !card.CanBeSelected())
-                {
-                    return;
-                }
-           
-            
-            
-                SlotCardAttacher slotCardAttacherOfCurrentCard = card.GetComponentInParent<SlotCardAttacher>();
-                Debug.Assert(slotCardAttacherOfCurrentCard != null, $"Invalid slotCardAttacherOfCurrentCard");
-                slotCardAttacherFrom = slotCardAttacherOfCurrentCard;
-                if (slotCardAttacherFrom != null)
-                {
-                    dragging = true;
-                    selectedCards = slotCardAttacherFrom.GetAttachedCards();
+                pileOfCards.ShowNextCard();
+                return;
+            }
+            Card card = hit.collider.GetComponentInParent<Card>();
+            if (card == null || !card.CanBeSelected())
+            {
+                return;
+            }
 
-                    playerCardManager.SelectCard(card);
 
-                    Vector3 cardPosition = card.transform.position;
-                    Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x,
-                        mousePosition.y, -mainCamera.transform.position.z));
-                    offset = cardPosition - new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, cardPosition.z);
-                    isSelectingCards = true;
+            SlotCardAttacher slotCardAttacherOfCurrentCard = card.GetComponentInParent<SlotCardAttacher>();
+            Debug.Assert(slotCardAttacherOfCurrentCard != null, $"Invalid slotCardAttacherOfCurrentCard");
+            slotCardAttacherFrom = slotCardAttacherOfCurrentCard;
+            if (slotCardAttacherFrom != null)
+            {
+                dragging = true;
+                selectedCards = slotCardAttacherFrom.GetAttachedCardsFromStartingCard(card);
+                var minimumPriorityOfSelectedCards = 10;
+                for (var index = 0; index < selectedCards.Count; index++)
+                {
+                    var selectedCard = selectedCards[index];
+                    slotCardAttacherFrom.DeAttachCard(selectedCard);
+                    selectedCard.SetPriority(minimumPriorityOfSelectedCards+index);
+                    playerCardManager.SelectCard(selectedCard);
+                    selectedCard.transform.parent = card.transform;
                 }
-            }     
+
+                card.onCardTriggeredCollider.AddListener(UpdateTargetSlotCardAttacher);
+                Vector3 cardPosition = card.transform.position;
+                Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(new Vector3(mousePosition.x,
+                    mousePosition.y, -mainCamera.transform.position.z));
+                offset = cardPosition - new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, cardPosition.z);
+                isSelectingCards = true;
+            }
         }
-  
+    }
+
+    private void UpdateTargetSlotCardAttacher(Collider2D arg0)
+    {
+        slotCardAttacherTarget = arg0.GetComponentInParent<SlotCardAttacher>();
     }
 
     public void OnCardUnSelected(InputAction.CallbackContext context)
@@ -135,30 +144,33 @@ public class CardSelectionManager : MonoBehaviour
         if (isSelectingCards)
         {
             dragging = false;
-
             if (slotCardAttacherTarget != null)
             {
                 for (var index = selectedCards.Count - 1; index >= 0; index--)
                 {
                     var card = selectedCards[index];
-                    slotCardAttacherTarget.AttachCard(card);
-                    playerCardManager.UnSelectCard(card);
-                }
+                    card.onCardTriggeredCollider.RemoveListener(UpdateTargetSlotCardAttacher);
 
-                slotCardAttacherTarget = null;
+                    bool isAttached = slotCardAttacherTarget.TryToAttachCard(card);
+                    if (isAttached)
+                    {
+                        var showingCardUpdater = slotCardAttacherFrom.GetComponent<CurrentShowingCardUpdater>();
+
+                        showingCardUpdater?.ShowNewLastCard();
+                        playerCardManager.UnSelectCard(card);
+                        selectedCards.Remove(card);
+                        slotCardAttacherTarget = null;
+                        return;
+                    }
+                }
             }
-            else
+            for (var index = selectedCards.Count - 1; index >= 0; index--)
             {
-                for (var index = selectedCards.Count - 1; index >= 0; index--)
-                {
-                    var card = selectedCards[index];
-                    slotCardAttacherFrom.AttachCard(card);
-                    playerCardManager.UnSelectCard(card);
-                }
-
-                slotCardAttacherFrom = null;
+                var card = selectedCards[index];
+                slotCardAttacherFrom.AttachCard(card);
+                playerCardManager.UnSelectCard(card);
             }
-
+            slotCardAttacherFrom = null;
             selectedCards = new List<Card>();
             isSelectingCards = false;
         }

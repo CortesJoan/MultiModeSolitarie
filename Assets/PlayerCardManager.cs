@@ -16,6 +16,8 @@ public class PlayerCardManager : MonoBehaviour
         selectedCards.Add(card);
         onCardSelected?.Invoke(card);
         card.onCardIsSelected?.Invoke();
+        
+        Debug.Log("Card Selected");
     }
 
     public void UnSelectCard(Card card)
@@ -23,6 +25,7 @@ public class PlayerCardManager : MonoBehaviour
         selectedCards.Remove(card);
         onCardUnSelected?.Invoke(card);
         card.onCardIsUnSelected?.Invoke();
+        Debug.Log("Card Unselected");
     }
 
 

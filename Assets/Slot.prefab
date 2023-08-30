@@ -78,9 +78,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b906b4768ee8dec4eb0d9e2601c7ef25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotConditions:
-  - {fileID: 0}
-  - {fileID: 0}
+  attachedCards: []
+  slotConditions: []
+  onAttachCard:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeAttachCard:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1003909328102689649
 GameObject:
   m_ObjectHideFlags: 0

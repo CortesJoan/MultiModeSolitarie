@@ -8,7 +8,7 @@ public class SolitarieCardGenerator : MonoBehaviour, IGameGenerator
     [SerializeField] SolitaireLayout cardLayout;
     [SerializeField] PileOfCards pileOfCards;
     [SerializeField] GameRules gameRules;
-
+    [SerializeField] private int randomSeed = -1;
     [ContextMenu(nameof(GenerateGame))]
     public void GenerateGame()
     {
@@ -52,6 +52,7 @@ public class SolitarieCardGenerator : MonoBehaviour, IGameGenerator
         {
             card.transform.parent = pileOfCards.transform;
             card.transform.localPosition = Vector3.zero;
+            card.RestorePriority();
             card.Hide();
         }
     }
@@ -82,6 +83,14 @@ public class SolitarieCardGenerator : MonoBehaviour, IGameGenerator
             existingCards.Add(card.GetCardType().ToString() + card.GetCardNumber().ToString());
         }
 
+        if (randomSeed==-1)
+        {
+            randomSeed = UnityEngine.Random.seed;
+        }
+        else
+        {
+            UnityEngine.Random.InitState(randomSeed);
+        }
         // Loop through the list and fill the void cards with random cards that are not already in the list
         for (int i = 0; i < amount; i++)
         {

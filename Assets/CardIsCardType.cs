@@ -1,15 +1,19 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-namespace DefaultNamespace
+[AddTypeMenu("SlotCondition/CardType condition")]
+[Serializable]
+public class CardIsCardType : ISlotCondition
 {
-    [CreateAssetMenu(fileName = "new CardIsCardType", menuName = "CardIsCardType", order = 100)]
-    public class CardIsCardType :SlotConditions
+    [SerializeField] private CardType cardType;
+
+    public bool IsConditionMet(Card cardToValue)
     {
-        [SerializeField] CardType cardType;
-            
-        public override bool IsConditionMet()
-        {               
-            return  cardToCheck.GetCardType() == cardType;
-        }
+        return cardToValue.GetCardType() == cardType;
+    }
+
+    public void UpdateDefaultCondition(Card cardToValue)
+    {
+        cardType = cardToValue.GetCardType();
     }
 }

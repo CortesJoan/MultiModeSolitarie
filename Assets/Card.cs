@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,18 +9,21 @@ public class Card : MonoBehaviour
 {
     [SerializeField] CardType cardType;
     [SerializeField] CardNumber cardNumber;
-
+//todo improve code related to card color
+    [SerializeField] CardColor cardColor;
     public UnityEvent<CardType> onCardTypeChanged;
     public UnityEvent onCardHided;
     public UnityEvent onCardShowed;
     public UnityEvent onCardIsSelected;
     public UnityEvent onCardIsUnSelected;
+    public UnityEvent<Collider2D> onCardTriggeredCollider;
     public UnityEvent<CardNumber> onCardNumberChanged;
     [SerializeField] private bool cardIsSelectable = true;
     public UnityEvent<int> onPriorityIncreased;
     public UnityEvent<int> onPriorityDecreased;
     [SerializeField] private int currentPriority = 0;
     private const int maxPriority = 10;
+    [SerializeField] private bool isShowed;
 
     // Start is called before the first frame update
     void Start()
@@ -33,17 +37,24 @@ public class Card : MonoBehaviour
 
     public void Show()
     {
+        isShowed = true;
         onCardShowed?.Invoke();
     }
 
     public void Hide()
     {
+        isShowed = false;
         onCardHided?.Invoke();
     }
 
-    public void DecreasePriority()
+    public bool IsShowed()
     {
-        currentPriority--;
+        return isShowed;
+    }
+
+    public void DecreasePriority(int amount=1)
+    {
+        currentPriority-=amount;
         onPriorityDecreased?.Invoke(currentPriority);
     }
 
@@ -62,7 +73,7 @@ public class Card : MonoBehaviour
 
     public void RestorePriority()
     {
-        if (currentPriority>0)
+        if (currentPriority > 0)
         {
             currentPriority = 1;
             onPriorityDecreased?.Invoke(currentPriority);
@@ -70,6 +81,20 @@ public class Card : MonoBehaviour
         else
         {
             currentPriority = 1;
+            onPriorityIncreased?.Invoke(currentPriority);
+        }
+    }
+
+    public void SetPriority(int value)
+    {
+        if (currentPriority > value)
+        {
+            currentPriority = value;
+            onPriorityDecreased?.Invoke(currentPriority);
+        }
+        else
+        {
+            currentPriority = value;
             onPriorityIncreased?.Invoke(currentPriority);
         }
     }
@@ -81,12 +106,16 @@ public class Card : MonoBehaviour
     public void SetCardType(CardType newCardType)
     {
         cardType = newCardType;
+        cardColor = newCardType == CardType.Pikes || newCardType == CardType.Clover ? CardColor.Black : CardColor.Red;
         onCardTypeChanged?.Invoke(newCardType);
     }
 
     public CardNumber GetCardNumber()
     {
         return cardNumber;
+    }  public CardColor GetCardColor()
+    {
+        return cardColor;
     }
 
     public void SetCardNumber(CardNumber newCardNumber)
@@ -105,6 +134,16 @@ public class Card : MonoBehaviour
     {
         return cardIsSelectable;
     }
+
+    public override string ToString()
+    {
+        return cardType.ToString() + " " + cardNumber.ToString();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        onCardTriggeredCollider?.Invoke(other);
+    }
 }
 
 public enum CardNumber
@@ -122,7 +161,8 @@ public enum CardNumber
     Number10,
     Jack,
     Queen,
-    King
+    King,
+    Any
 }
 
 public enum CardType
@@ -131,4 +171,11 @@ public enum CardType
     Tiles,
     Clover,
     Pikes
+}
+
+public enum CardColor
+{
+    Red,
+    Black,
+    Any
 }
