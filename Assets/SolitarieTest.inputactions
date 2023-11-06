@@ -25,7 +25,7 @@
                 },
                 {
                     "name": "Select",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "d77ba768-008c-402c-b551-99674e05ba72",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -34,12 +34,12 @@
                 },
                 {
                     "name": "UnSelect",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "7ec06ff2-0e2c-4d47-86db-d1f6eb2c0b0a",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "SelectNext",
@@ -272,6 +272,17 @@
                 },
                 {
                     "name": "",
+                    "id": "ed6c932b-363f-460c-b7f3-7a11a1264ca0",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touch;Keyboard&Mouse",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "c77b4320-5b22-4d6f-8726-c1d69961da7a",
                     "path": "<Mouse>/leftButton",
                     "interactions": "Press(behavior=1)",
@@ -294,6 +305,17 @@
                 },
                 {
                     "name": "",
+                    "id": "1b237073-cb3f-453d-b17e-8946ba7079f2",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UnSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "874bf064-6c6a-40c8-af1c-b632ccfd96ba",
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
@@ -310,6 +332,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
+                    "action": "Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8220b243-9a19-47ba-8cbb-22586b0435fa",
+                    "path": "<Touchscreen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Touch",
                     "action": "Position",
                     "isComposite": false,
                     "isPartOfComposite": false

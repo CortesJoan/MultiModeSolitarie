@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ccf0ee43f2543238811f0651f5aec83, type: 3}
+  m_Name: FrenchCards
+  m_EditorClassIdentifier: 
+  cardSprites:
+  - spriteNumber:
+    - {fileID: -533223024, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 2135325993, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 1061944735, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 274073048, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 559463954, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -201015923, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 1933569991, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 724639411, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -1233812077, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 1459119143, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -1843063079, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 470395606, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 467496496, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -1775743745, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+  - spriteNumber:
+    - {fileID: 1076540683, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -37956003, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -1339973960, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -1301903077, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 118840390, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -1280564730, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 1556084397, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -2034078724, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -308083439, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 472418489, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 48133722, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -182764915, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -1335386479, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 553040329, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+  - spriteNumber:
+    - {fileID: 1076540683, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 390441126, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -951931286, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 603467455, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 1264924197, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 1859716881, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 1628428161, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -314740143, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 1319627576, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -171047781, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -821618190, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -89412436, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -1301176636, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -733059522, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+  - spriteNumber:
+    - {fileID: 1574767826, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 88770776, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 253384943, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -702886693, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -1177675617, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -548759795, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -1997442222, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -1394239847, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 1753846522, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -503057105, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -1220252622, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -1519036145, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: 111987149, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
+    - {fileID: -1555843609, guid: 0a80cd212983bb248b707ec1718debdc, type: 3}
