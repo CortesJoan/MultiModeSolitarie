@@ -15,10 +15,6 @@ public class SolitaireCardGenerator : MonoBehaviour, IGameGenerator
     public void GenerateGame()
     {
         DestroyPreviousPileOfCards();
-        if (VisualDataBank.instance == null)
-        {
-            VisualDataBank.instance = FindObjectOfType<VisualDataBank>();
-        }
         List<List<Card>> generatedCards = new List<List<Card>>();
         int remainingCards = gameRules.TotalCards;
         existingCards.Clear();
