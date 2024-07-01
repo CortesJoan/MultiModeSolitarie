@@ -79,7 +79,7 @@ public class CardSelectionManager : MonoBehaviour
             }
 
             Card card = hit.collider.GetComponentInParent<Card>();
-            if (card == null || !card.CanBeSelected())
+            if (card == null || !card.CanBeSelected() ||selectedCards.Contains(card))
             {
                 return;
             }

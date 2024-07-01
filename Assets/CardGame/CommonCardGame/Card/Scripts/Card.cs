@@ -39,7 +39,7 @@ public class Card : MonoBehaviour
         onCardHided?.Invoke();
     }
 
-    public bool IsShowed()
+    public bool IsShown()
     {
         return isShowed;
     }

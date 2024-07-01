@@ -48,7 +48,7 @@ public class PileOfCards : MonoBehaviour, ISelectionable
             {
                 HidePreviousCard(currentShowingCard);
             }
-            currentShowingCard ++;
+            currentShowingCard++;
             ShowCard(currentShowingCard);
         }
     }
@@ -77,26 +77,25 @@ public class PileOfCards : MonoBehaviour, ISelectionable
         for (var index = 0; index < currentPileOfCards.Count; index++)
         {
             var card = currentPileOfCards[index];
-            showedPileSlot.DeAttachCard(card,false);
-            hidedPileSlot.AttachCard(card,false);
+            showedPileSlot.DeAttachCard(card, false);
+            hidedPileSlot.AttachCard(card, false);
             card.RestorePriority();
             card.Hide();
-        
+
             card.transform.parent = transform;
             card.transform.localPosition = Vector3.zero;
         }
         currentShowingCard = -1;
-
     }
 
     public void OnCardAttached(Card attachedCard)
     {
         if (!currentPileOfCards.Contains(attachedCard))
         {
-            int placeToInsert = currentShowingCard == -1 ? 0 : currentShowingCard;
+            int placeToInsert = currentShowingCard == -1 ? 0 : currentShowingCard + 1;
             currentPileOfCards.Insert(placeToInsert, attachedCard);
             if (placeToInsert - 1 != -1)
-            {
+            {  
                 HidePreviousCard(currentShowingCard);
             }
             ShowCard(placeToInsert);
@@ -108,14 +107,17 @@ public class PileOfCards : MonoBehaviour, ISelectionable
         var currentSlotAttacher = card.GetComponentInParent<SlotCardAttacher>();
         if (currentSlotAttacher != showedPileSlot)
         {
-            ShowPreviousCard();
+            if (card == currentPileOfCards[currentShowingCard + 1])
+            {
+                currentShowingCard = Mathf.Max(currentShowingCard - 1, -1);
+            }
             currentPileOfCards.Remove(card);
-            currentShowingCard = Mathf.Max(currentShowingCard - 1, -1);
         }
-        else if (currentSlotAttacher == hidedPileSlot)
+        else if (currentSlotAttacher != hidedPileSlot)
         {
-            //    currentPileOfCards.Insert(currentShowingCard+1,card);
-            //   currentShowingCard = Mathf.Min(currentShowingCard +1, currentPileOfCards.Count);
+            currentShowingCard = Mathf.Max(currentShowingCard - 1, -1);
+            HidePreviousCard(currentShowingCard);
+            ShowCard(currentShowingCard);
         }
     }
 

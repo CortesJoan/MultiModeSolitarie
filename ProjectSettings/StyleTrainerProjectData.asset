@@ -1,0 +1,589 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 53
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e07c9b2c97f84356bb2bfac29363e611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StyleTrainerData:
+    rid: 6388482638481195008
+  m_DefaultStyleData:
+    rid: 6388482638481195009
+  m_DefaultStyleVersion: 2023090802
+  m_DefaultStyles:
+  - rid: 6388482638481195292
+  - rid: 6388482638481195293
+  - rid: 6388482638481195294
+  m_AssetPath: 
+  m_PreviousProjectIDs: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 6388482638481195008
+      type: {class: StyleTrainerData, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: d6efa8dd-5869-479d-87b0-2f3b069003a9
+        m_State: 1
+        m_Styles:
+        - rid: 6388482638481195295
+        - rid: 6388482638481195323
+        - rid: 6388482638481195324
+        m_Version: 202230001
+    - rid: 6388482638481195009
+      type: {class: StyleTrainerData, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: 11000000-0000-0000-0000-000000000011
+        m_State: 1
+        m_Styles:
+        - rid: 6388482638481195296
+        - rid: 6388482638481195297
+        - rid: 6388482638481195298
+        m_Version: 202230001
+    - rid: 6388482638481195292
+      type: {class: StyleData, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: c4a37424-aff2-4190-89ab-6b8f307bdaf4
+        m_State: 1
+        m_Thumbnail:
+          rid: -2
+        m_Visible: 0
+        selectedCheckPointGUID: ab0d69da-7f0e-41b9-ab4f-0dbe2bf9614a
+        m_FavoriteCheckPointGUID: ab0d69da-7f0e-41b9-ab4f-0dbe2bf9614a
+        parentID: 00000000-0000-0000-0000-000000000000
+        m_ProjectID: de075932-fbb5-499c-b129-ba06b1c7b0df
+        m_CheckPoints:
+        - m_Guid: ab0d69da-7f0e-41b9-ab4f-0dbe2bf9614a
+          m_State: 1
+          m_ProjectID: de075932-fbb5-499c-b129-ba06b1c7b0df
+          name: Default Style (Animals)
+          description: Style specialized on generating animals based on Happy Harvest
+            style.
+          parent_id: 00000000-0000-0000-0000-000000000000
+          dropDownLabelName: Default Style (Animals)
+          trainingSetData:
+            m_Guid: 
+            m_State: 0
+            m_TrainingSet: []
+            m_ProjectID: 
+          validationImagesData: []
+          m_TrainingSteps: 0
+    - rid: 6388482638481195293
+      type: {class: StyleData, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: cb1bb903-4e91-4682-bff2-4671555e8f5d
+        m_State: 1
+        m_Thumbnail:
+          rid: -2
+        m_Visible: 0
+        selectedCheckPointGUID: 9070f7e6-5f75-4809-b11e-6b27c0aa1139
+        m_FavoriteCheckPointGUID: 9070f7e6-5f75-4809-b11e-6b27c0aa1139
+        parentID: 00000000-0000-0000-0000-000000000000
+        m_ProjectID: de075932-fbb5-499c-b129-ba06b1c7b0df
+        m_CheckPoints:
+        - m_Guid: 9070f7e6-5f75-4809-b11e-6b27c0aa1139
+          m_State: 1
+          m_ProjectID: de075932-fbb5-499c-b129-ba06b1c7b0df
+          name: Default Style (Vegetation)
+          description: Style specialized on generating vegetation based on Happy
+            Harvest style.
+          parent_id: 00000000-0000-0000-0000-000000000000
+          dropDownLabelName: Default Style (Vegetation)
+          trainingSetData:
+            m_Guid: 
+            m_State: 0
+            m_TrainingSet: []
+            m_ProjectID: 
+          validationImagesData: []
+          m_TrainingSteps: 0
+    - rid: 6388482638481195294
+      type: {class: StyleData, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: b2ff9ced-9904-443a-9826-0e12146f16e2
+        m_State: 1
+        m_Thumbnail:
+          rid: -2
+        m_Visible: 0
+        selectedCheckPointGUID: da6e2c60-1038-450f-b56f-c105032fce12
+        m_FavoriteCheckPointGUID: da6e2c60-1038-450f-b56f-c105032fce12
+        parentID: 00000000-0000-0000-0000-000000000000
+        m_ProjectID: de075932-fbb5-499c-b129-ba06b1c7b0df
+        m_CheckPoints:
+        - m_Guid: da6e2c60-1038-450f-b56f-c105032fce12
+          m_State: 1
+          m_ProjectID: de075932-fbb5-499c-b129-ba06b1c7b0df
+          name: Default Style (Buildings)
+          description: Style specialized on generating buildings based on Happy Harvest
+            style.
+          parent_id: 00000000-0000-0000-0000-000000000000
+          dropDownLabelName: Default Style (Buildings)
+          trainingSetData:
+            m_Guid: 
+            m_State: 0
+            m_TrainingSet: []
+            m_ProjectID: 
+          validationImagesData: []
+          m_TrainingSteps: 0
+    - rid: 6388482638481195295
+      type: {class: StyleData, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: 89a5db82-c77d-4cb2-9bae-2078f2d59390
+        m_State: 1
+        m_Thumbnail:
+          rid: 6388482638481195299
+        m_Visible: 1
+        selectedCheckPointGUID: 163bbf4e-ee63-403c-a4f4-71320fed953e
+        m_FavoriteCheckPointGUID: active
+        parentID: 00000000-0000-0000-0000-000000000000
+        m_ProjectID: d6efa8dd-5869-479d-87b0-2f3b069003a9
+        m_CheckPoints:
+        - m_Guid: b74da14a-5fea-4e67-bb6b-0a3c51aa233d
+          m_State: 1
+          m_ProjectID: d6efa8dd-5869-479d-87b0-2f3b069003a9
+          name: Fate Illya Style
+          description: Fate vn style
+          parent_id: 00000000-0000-0000-0000-000000000000
+          dropDownLabelName: Version 1
+          trainingSetData:
+            m_Guid: 0ec9f2d1-f515-41bf-a355-9750e827bc43
+            m_State: 5
+            m_TrainingSet: []
+            m_ProjectID: d6efa8dd-5869-479d-87b0-2f3b069003a9
+          validationImagesData:
+          - m_Guid: 24d8ed89-cbac-46d4-ace2-cdafc1622168
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: 24d8ed89-cbac-46d4-ace2-cdafc1622168
+              m_State: 5
+            m_Prompt: illyasviel looking at front
+          - m_Guid: 876e9402-4c1d-46b8-9b27-27739439e1e2
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: 876e9402-4c1d-46b8-9b27-27739439e1e2
+              m_State: 5
+            m_Prompt: illyasviel dress
+          - m_Guid: 0c29f111-6586-470e-a406-365605c8564e
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: 0c29f111-6586-470e-a406-365605c8564e
+              m_State: 5
+            m_Prompt: illyasviel close up
+          m_TrainingSteps: 100
+        - m_Guid: 78e45a4c-b3da-4bff-8791-593112dd94f4
+          m_State: 1
+          m_ProjectID: d6efa8dd-5869-479d-87b0-2f3b069003a9
+          name: Fate Illya Style (new)
+          description: Fate vn style
+          parent_id: 00000000-0000-0000-0000-000000000000
+          dropDownLabelName: Version 2
+          trainingSetData:
+            m_Guid: f129f200-b11b-45d7-9adf-4ea6b94e9cb8
+            m_State: 5
+            m_TrainingSet: []
+            m_ProjectID: d6efa8dd-5869-479d-87b0-2f3b069003a9
+          validationImagesData:
+          - m_Guid: 15e0df89-91d0-4032-8c4e-888b7e8dbbfb
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: 15e0df89-91d0-4032-8c4e-888b7e8dbbfb
+              m_State: 5
+            m_Prompt: illyasviel looking at front
+          - m_Guid: d0a8d63b-0b49-45be-bb75-5f32d3165ef2
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: d0a8d63b-0b49-45be-bb75-5f32d3165ef2
+              m_State: 5
+            m_Prompt: illyasviel dress
+          - m_Guid: b186aede-2f8e-45e8-96b8-53f4f87080a5
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: b186aede-2f8e-45e8-96b8-53f4f87080a5
+              m_State: 5
+            m_Prompt: illyasviel close up
+          m_TrainingSteps: 1000
+        - m_Guid: 83ffae83-4a81-4417-84c2-5210b5b1827d
+          m_State: 1
+          m_ProjectID: d6efa8dd-5869-479d-87b0-2f3b069003a9
+          name: Fate Illya Style (new) (new)
+          description: Fate vn style
+          parent_id: 00000000-0000-0000-0000-000000000000
+          dropDownLabelName: Version 3
+          trainingSetData:
+            m_Guid: 14fbaa37-2d3c-4518-9a21-189ba73e0fb5
+            m_State: 5
+            m_TrainingSet: []
+            m_ProjectID: d6efa8dd-5869-479d-87b0-2f3b069003a9
+          validationImagesData:
+          - m_Guid: 8aca9777-e427-44ea-a4bf-37c46d0cf23a
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: 8aca9777-e427-44ea-a4bf-37c46d0cf23a
+              m_State: 5
+            m_Prompt: illyasviel looking at front
+          - m_Guid: c1db2707-b0be-42d6-9a44-52b8d5ee25ae
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: c1db2707-b0be-42d6-9a44-52b8d5ee25ae
+              m_State: 5
+            m_Prompt: illyasviel dress
+          - m_Guid: d12fa4cf-83b2-4b96-a832-85a5aaf6243c
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: d12fa4cf-83b2-4b96-a832-85a5aaf6243c
+              m_State: 5
+            m_Prompt: illyasviel close up
+          m_TrainingSteps: 100
+        - m_Guid: 163bbf4e-ee63-403c-a4f4-71320fed953e
+          m_State: 1
+          m_ProjectID: d6efa8dd-5869-479d-87b0-2f3b069003a9
+          name: Fate Illya Style (new) (new) (new)
+          description: Fate vn style
+          parent_id: 00000000-0000-0000-0000-000000000000
+          dropDownLabelName: Version 4
+          trainingSetData:
+            m_Guid: 5abedca9-366e-402b-95ec-562876bdbb46
+            m_State: 1
+            m_TrainingSet:
+            - m_Guid: 128123b4-1b09-41b4-8d1a-a803a6ea3d75
+              m_State: 5
+              m_ImageArtifact:
+                rid: 6388482909511090916
+            - m_Guid: 82b6db5d-09d3-44f5-be12-152d3d63f159
+              m_State: 5
+              m_ImageArtifact:
+                rid: 6388482909511090917
+            - m_Guid: 759070da-7d39-42fd-8198-704b540c9022
+              m_State: 5
+              m_ImageArtifact:
+                rid: 6388482909511090918
+            - m_Guid: 5580982e-a3f4-4b4e-9d57-b53d67181c87
+              m_State: 5
+              m_ImageArtifact:
+                rid: 6388482909511090919
+            - m_Guid: 94a67e42-fd80-4186-b275-748164891715
+              m_State: 5
+              m_ImageArtifact:
+                rid: 6388482909511090920
+            - m_Guid: ee3f5971-4aa2-4b43-94d6-69953ea74644
+              m_State: 5
+              m_ImageArtifact:
+                rid: 6388482909511090921
+            - m_Guid: 885294aa-7837-41fd-b31f-cd47bc6d0236
+              m_State: 5
+              m_ImageArtifact:
+                rid: 6388482909511090922
+            - m_Guid: 80cd3d02-9dc9-47b8-a49f-f8fa472102b8
+              m_State: 5
+              m_ImageArtifact:
+                rid: 6388482909511090923
+            - m_Guid: e166f10b-353d-4450-8f97-b2c68a6d1e59
+              m_State: 5
+              m_ImageArtifact:
+                rid: 6388482909511090924
+            - m_Guid: 6b468db9-1cb4-4940-a9e4-2c7dc932f4bd
+              m_State: 5
+              m_ImageArtifact:
+                rid: 6388482909511090925
+            - m_Guid: 50a44d30-4ad2-465e-a2d0-e6c24723bb3e
+              m_State: 5
+              m_ImageArtifact:
+                rid: 6388482909511090926
+            - m_Guid: 256a0a78-cf74-420b-80f4-d3776fda2367
+              m_State: 5
+              m_ImageArtifact:
+                rid: 6388482909511090927
+            m_ProjectID: d6efa8dd-5869-479d-87b0-2f3b069003a9
+          validationImagesData:
+          - m_Guid: 7c87d932-22ab-4180-9d71-70d166b726bd
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: 7c87d932-22ab-4180-9d71-70d166b726bd
+              m_State: 1
+            m_Prompt: illyasviel looking at front
+          - m_Guid: 6856daf8-9320-4936-b91e-942c234bdbc3
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: 6856daf8-9320-4936-b91e-942c234bdbc3
+              m_State: 1
+            m_Prompt: illyasviel dress
+          - m_Guid: d8594153-21e0-410f-ac89-c250904e5b20
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: d8594153-21e0-410f-ac89-c250904e5b20
+              m_State: 1
+            m_Prompt: illyasviel close up
+          m_TrainingSteps: 1000
+    - rid: 6388482638481195296
+      type: {class: StyleData, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: 440dded3-6603-4b61-baa9-3b0a11d7cdec
+        m_State: 1
+        m_Thumbnail:
+          rid: -2
+        m_Visible: 1
+        selectedCheckPointGUID: 00000000-0000-0000-0000-000000000000
+        m_FavoriteCheckPointGUID: active
+        parentID: 00000000-0000-0000-0000-000000000000
+        m_ProjectID: 11000000-0000-0000-0000-000000000011
+        m_CheckPoints:
+        - m_Guid: 3692ac2a-348d-4809-9805-b21a6eada304
+          m_State: 1
+          m_ProjectID: 11000000-0000-0000-0000-000000000011
+          name: Animals
+          description: Animals (Blackbox 500)
+          parent_id: 00000000-0000-0000-0000-000000000000
+          dropDownLabelName: Version 1
+          trainingSetData:
+            m_Guid: 9f1f10de-9c44-44d6-b60d-bc91da5dcb4f
+            m_State: 5
+            m_TrainingSet: []
+            m_ProjectID: 11000000-0000-0000-0000-000000000011
+          validationImagesData:
+          - m_Guid: 0073d05b-4e3f-47d1-a651-a50d54f3b388
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: 0073d05b-4e3f-47d1-a651-a50d54f3b388
+              m_State: 5
+            m_Prompt: horse
+          - m_Guid: ebbb2734-a576-4a63-a876-f63d3e492716
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: ebbb2734-a576-4a63-a876-f63d3e492716
+              m_State: 5
+            m_Prompt: chicken
+          - m_Guid: 215ed507-b7d6-41d1-b428-98f2ae10c7ac
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: 215ed507-b7d6-41d1-b428-98f2ae10c7ac
+              m_State: 5
+            m_Prompt: cow
+          m_TrainingSteps: 100
+    - rid: 6388482638481195297
+      type: {class: StyleData, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: 8c845506-846c-4573-926c-3845a7c68275
+        m_State: 1
+        m_Thumbnail:
+          rid: -2
+        m_Visible: 1
+        selectedCheckPointGUID: 00000000-0000-0000-0000-000000000000
+        m_FavoriteCheckPointGUID: active
+        parentID: 00000000-0000-0000-0000-000000000000
+        m_ProjectID: 11000000-0000-0000-0000-000000000011
+        m_CheckPoints:
+        - m_Guid: b1cf774e-39e8-4273-9b39-749067b9c222
+          m_State: 1
+          m_ProjectID: 11000000-0000-0000-0000-000000000011
+          name: Vegetation
+          description: Vegetation (Blackbox 500)
+          parent_id: 00000000-0000-0000-0000-000000000000
+          dropDownLabelName: Version 1
+          trainingSetData:
+            m_Guid: 7c72d8b9-badb-4e78-8aed-8b568f5911a4
+            m_State: 5
+            m_TrainingSet: []
+            m_ProjectID: 11000000-0000-0000-0000-000000000011
+          validationImagesData:
+          - m_Guid: 818ef2e4-817f-402a-9a7d-4196b616c7a4
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: 818ef2e4-817f-402a-9a7d-4196b616c7a4
+              m_State: 5
+            m_Prompt: wheat
+          - m_Guid: 643f4841-5ab5-4d07-9db3-63306db74d3b
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: 643f4841-5ab5-4d07-9db3-63306db74d3b
+              m_State: 5
+            m_Prompt: tomato
+          - m_Guid: b4932fa0-1de3-4129-b273-99432dd5c981
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: b4932fa0-1de3-4129-b273-99432dd5c981
+              m_State: 5
+            m_Prompt: carrot
+          m_TrainingSteps: 100
+    - rid: 6388482638481195298
+      type: {class: StyleData, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: 06c229b5-24d4-41bc-9e38-71ae734b2904
+        m_State: 1
+        m_Thumbnail:
+          rid: -2
+        m_Visible: 1
+        selectedCheckPointGUID: 00000000-0000-0000-0000-000000000000
+        m_FavoriteCheckPointGUID: active
+        parentID: 00000000-0000-0000-0000-000000000000
+        m_ProjectID: 11000000-0000-0000-0000-000000000011
+        m_CheckPoints:
+        - m_Guid: bab113a4-5ebc-4c50-97f1-4a0738162a3f
+          m_State: 1
+          m_ProjectID: 11000000-0000-0000-0000-000000000011
+          name: Buildings
+          description: Buildings (Blackbox 500)
+          parent_id: 00000000-0000-0000-0000-000000000000
+          dropDownLabelName: Version 1
+          trainingSetData:
+            m_Guid: 7739a4a5-a277-4e7f-90b0-681dd0c5121f
+            m_State: 5
+            m_TrainingSet: []
+            m_ProjectID: 11000000-0000-0000-0000-000000000011
+          validationImagesData:
+          - m_Guid: 9222a3e4-3e12-4f09-a9d0-95cd82ffec74
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: 9222a3e4-3e12-4f09-a9d0-95cd82ffec74
+              m_State: 5
+            m_Prompt: barn
+          - m_Guid: 93ae12a2-c462-4737-86cd-70e75d457a3c
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: 93ae12a2-c462-4737-86cd-70e75d457a3c
+              m_State: 5
+            m_Prompt: windmill
+          - m_Guid: 1b2a3915-6fa9-40bc-a46e-49bb30c1dedf
+            m_State: 5
+            m_ImageArtifact:
+              m_Guid: 1b2a3915-6fa9-40bc-a46e-49bb30c1dedf
+              m_State: 5
+            m_Prompt: house
+          m_TrainingSteps: 100
+    - rid: 6388482638481195299
+      type: {class: ImageArtifact, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: 00000000-0000-0000-0000-000000000000
+        m_State: 3
+    - rid: 6388482638481195323
+      type: {class: StyleData, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: 
+        m_State: 3
+        m_Thumbnail:
+          rid: 6388482638481195325
+        m_Visible: 1
+        selectedCheckPointGUID: 00000000-0000-0000-0000-000000000000
+        m_FavoriteCheckPointGUID: 00000000-0000-0000-0000-000000000000
+        parentID: 00000000-0000-0000-0000-000000000000
+        m_ProjectID: d6efa8dd-5869-479d-87b0-2f3b069003a9
+        m_CheckPoints:
+        - m_Guid: 00000000-0000-0000-0000-000000000000
+          m_State: 3
+          m_ProjectID: d6efa8dd-5869-479d-87b0-2f3b069003a9
+          name: New Style
+          description: Set a description here to help you remember what this style
+            is for.
+          parent_id: 00000000-0000-0000-0000-000000000000
+          dropDownLabelName: New Version
+          trainingSetData:
+            m_Guid: 00000000-0000-0000-0000-000000000000
+            m_State: 3
+            m_TrainingSet: []
+            m_ProjectID: d6efa8dd-5869-479d-87b0-2f3b069003a9
+          validationImagesData: []
+          m_TrainingSteps: 100
+    - rid: 6388482638481195324
+      type: {class: StyleData, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: 
+        m_State: 3
+        m_Thumbnail:
+          rid: 6388482638481195326
+        m_Visible: 1
+        selectedCheckPointGUID: 00000000-0000-0000-0000-000000000000
+        m_FavoriteCheckPointGUID: 00000000-0000-0000-0000-000000000000
+        parentID: 00000000-0000-0000-0000-000000000000
+        m_ProjectID: d6efa8dd-5869-479d-87b0-2f3b069003a9
+        m_CheckPoints:
+        - m_Guid: 00000000-0000-0000-0000-000000000000
+          m_State: 3
+          m_ProjectID: d6efa8dd-5869-479d-87b0-2f3b069003a9
+          name: Illyav2
+          description: Set a description here to help you remember what this style
+            is for.
+          parent_id: 00000000-0000-0000-0000-000000000000
+          dropDownLabelName: New Version
+          trainingSetData:
+            m_Guid: 00000000-0000-0000-0000-000000000000
+            m_State: 3
+            m_TrainingSet: []
+            m_ProjectID: d6efa8dd-5869-479d-87b0-2f3b069003a9
+          validationImagesData: []
+          m_TrainingSteps: 100
+    - rid: 6388482638481195325
+      type: {class: ImageArtifact, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: 00000000-0000-0000-0000-000000000000
+        m_State: 3
+    - rid: 6388482638481195326
+      type: {class: ImageArtifact, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: 00000000-0000-0000-0000-000000000000
+        m_State: 3
+    - rid: 6388482909511090916
+      type: {class: ImageArtifact, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: 128123b4-1b09-41b4-8d1a-a803a6ea3d75
+        m_State: 1
+    - rid: 6388482909511090917
+      type: {class: ImageArtifact, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: 82b6db5d-09d3-44f5-be12-152d3d63f159
+        m_State: 1
+    - rid: 6388482909511090918
+      type: {class: ImageArtifact, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: 759070da-7d39-42fd-8198-704b540c9022
+        m_State: 1
+    - rid: 6388482909511090919
+      type: {class: ImageArtifact, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: 5580982e-a3f4-4b4e-9d57-b53d67181c87
+        m_State: 1
+    - rid: 6388482909511090920
+      type: {class: ImageArtifact, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: 94a67e42-fd80-4186-b275-748164891715
+        m_State: 1
+    - rid: 6388482909511090921
+      type: {class: ImageArtifact, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: ee3f5971-4aa2-4b43-94d6-69953ea74644
+        m_State: 1
+    - rid: 6388482909511090922
+      type: {class: ImageArtifact, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: 885294aa-7837-41fd-b31f-cd47bc6d0236
+        m_State: 1
+    - rid: 6388482909511090923
+      type: {class: ImageArtifact, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: 80cd3d02-9dc9-47b8-a49f-f8fa472102b8
+        m_State: 1
+    - rid: 6388482909511090924
+      type: {class: ImageArtifact, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: e166f10b-353d-4450-8f97-b2c68a6d1e59
+        m_State: 1
+    - rid: 6388482909511090925
+      type: {class: ImageArtifact, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: 6b468db9-1cb4-4940-a9e4-2c7dc932f4bd
+        m_State: 5
+    - rid: 6388482909511090926
+      type: {class: ImageArtifact, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: 50a44d30-4ad2-465e-a2d0-e6c24723bb3e
+        m_State: 5
+    - rid: 6388482909511090927
+      type: {class: ImageArtifact, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
+      data:
+        m_Guid: 256a0a78-cf74-420b-80f4-d3776fda2367
+        m_State: 5

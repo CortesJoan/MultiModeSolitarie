@@ -31,17 +31,18 @@ public class SolitaireLayout : MonoBehaviour
     public void PutCardsInLayout(List<List<Card>> cards)
     {
         Debug.Log($"cards count {cards.Count}  ");
-
-        for (int i = 0; i < layoutInstantiatedSlots.Count; i++)
+        for (var i = 0; i < layoutInstantiatedSlots.Count; i++)
         {
             SlotCardAttacher layoutSlot = layoutInstantiatedSlots[i].GetComponent<SlotCardAttacher>();
-            float currentSeparation = 0;
-            layoutSlot.SetAttachedCardsDistance(cardYSeparation);
-            foreach (Card card in cards[i])
+        
+            if(cards.Count > i && cards[i].Count > 0) 
             {
-                layoutSlot.AttachCard(card);
+                foreach (Card card in cards[i])
+                {
+                    layoutSlot.AttachCard(card);
+                }
+                layoutSlot.CheckSlotConditions(cards[i].Last());
             }
-            layoutSlot.CheckSlotConditions(cards[i].Last());
         }
     }
 
@@ -62,5 +63,19 @@ public class SolitaireLayout : MonoBehaviour
     public bool IsPrepared()
     {
         return GetComponentsInChildren<SlotCardAttacher>().Length > 0;
+    }
+
+    public int GetTotalCardsCount()
+    {
+        int totalCards = 0;
+
+        foreach (GameObject slot in layoutInstantiatedSlots)
+        {
+            SlotCardAttacher attacher = slot.GetComponent<SlotCardAttacher>();
+            totalCards += attacher.GetAttachedCards().Count;
+        }
+
+        return totalCards;
+        
     }
 }

@@ -10,7 +10,7 @@ public class CurrentShowingCardUpdater : MonoBehaviour
     {
         if (transform.GetChild(transform.childCount - 1).TryGetComponent(out Card newLastCard))
         {
-            if (!newLastCard.IsShowed())
+            if (!newLastCard.IsShown())
             {
                 newLastCard.ToggleSelectable(true);
                 newLastCard.Show();   

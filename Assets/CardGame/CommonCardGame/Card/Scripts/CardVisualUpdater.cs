@@ -10,28 +10,24 @@ public class CardVisualUpdater : MonoBehaviour
     [SerializeField] Sprite hideSprite;
     [SerializeField] VisualDataBankV2 visualDataBank;
     [SerializeField] Sprite lastShowedCard;
-
-    public void VisualInitializer()
-    {
-    }
+ 
 
     public void OnCardTypeChanged(CardType newCardType)
     {
-        Debug.Log("Card changed to " + newCardType);
-        Sprite newCardSprite = visualDataBank.GetCardVisual(newCardType, relatedCard.GetCardNumber());
-        UpdateCardSprite(newCardSprite);
+        UpdateCardSprite(relatedCard);
     }
 
     public void OnCardNumberChanged(CardNumber newCardNumber)
     {
-        Sprite newCardSprite = visualDataBank.GetCardVisual(relatedCard.GetCardType(), newCardNumber);
-        UpdateCardSprite(newCardSprite);
+        UpdateCardSprite(relatedCard);
     }
 
-    void UpdateCardSprite(Sprite newSprite)
+    void UpdateCardSprite(Card relatedCard)
     {
-        spriteRenderer.sprite = newSprite;
-        lastShowedCard = newSprite;
+        Sprite newCardSprite = visualDataBank.GetCardVisual(relatedCard.GetCardType(), relatedCard.GetCardNumber());
+
+        spriteRenderer.sprite = newCardSprite;
+        lastShowedCard = newCardSprite;
     }
 
     public void OnHideCard()

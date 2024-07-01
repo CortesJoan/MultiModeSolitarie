@@ -34,7 +34,7 @@ public class SlotCardAttacher : MonoBehaviour
 
     public bool CheckSlotConditions(Card card)
     {
-        bool allConditionsMeet= slotConditions.TrueForAll(a =>
+        bool allConditionsMeet = slotConditions.TrueForAll(a =>
         {
             if (a != null)
             {
@@ -44,14 +44,17 @@ public class SlotCardAttacher : MonoBehaviour
         });
         if (allConditionsMeet)
         {
-            slotConditions.ForEach((c)=> c.OnConditionIsMet(card));
+            slotConditions.ForEach((c) => c.OnConditionIsMet(card));
         }
         return allConditionsMeet;
     }
 
     public void AttachCard(Card card, bool notifyEvents = true)
     {
-        attachedCards.Add(card);
+        if (!attachedCards.Contains(card))
+        {
+             attachedCards.Add(card);
+        }
         Transform cardTransform = card.transform;
         cardTransform.SetParent(transform);
         int lastIndex = attachedCards.IndexOf(attachedCards.LastOrDefault());
@@ -88,10 +91,7 @@ public class SlotCardAttacher : MonoBehaviour
         Debug.Log($"Card deattached " + card.ToString() + " to " + transform.name);
         if (attachedCards.Count == 0)
         {
-          
             slotConditions = slotConditionsWhenNoCardsAttached.Select(cond => cond.Clone()).ToList();
-
-            
         }
         else
         {
@@ -114,6 +114,7 @@ public class SlotCardAttacher : MonoBehaviour
             slotCondition.OnConditionIsMet(card);
         }
     }
+
     public List<Card> GetAttachedCardsFromStartingCard(Card startCard)
     {
         int startingCardIndex = attachedCards.IndexOf(startCard);
