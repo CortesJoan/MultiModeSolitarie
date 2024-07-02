@@ -151,6 +151,7 @@ public class CardSelectionManager : MonoBehaviour
                         isCardAttached = false;
                     }
                 }
+                if(isCardAttached)
                 slotCardAttacherTarget.ForceOnConditionMet(lastCard);
 
                 slotCardAttacherTarget = null;
