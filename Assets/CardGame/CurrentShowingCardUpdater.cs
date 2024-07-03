@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CurrentShowingCardUpdater : MonoBehaviour
+public class CurrentShowingCardUpdater : MonoBehaviour, ICardPlacedOnAnotherPlace
 {
     [SerializeField] private SlotCardAttacher slotCardAttacher;
+
+    public void NotifyCardIsPlacedOnAnotherPlace(Card card)
+    {
+        ShowNewLastCard();
+    }
 
     public void ShowNewLastCard()
     {
