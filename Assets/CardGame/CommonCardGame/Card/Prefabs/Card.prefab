@@ -170,6 +170,7 @@ MonoBehaviour:
   cardIsSelectable: 1
   currentPriority: 0
   isShowed: 0
+  cardTrigger: {fileID: 5257003368773491405}
   onCardTypeChanged:
     m_PersistentCalls:
       m_Calls:
