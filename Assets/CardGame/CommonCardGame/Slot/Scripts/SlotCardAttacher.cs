@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,8 @@ public class SlotCardAttacher : MonoBehaviour
     [SerializeField] public UnityEvent<Card> onDeAttachCard;
     [SerializeReference, SubclassSelector]
     private List<ISlotCondition> slotConditionsWhenNoCardsAttached = new List<ISlotCondition>();
-    [HideInInspector] [SerializeField] private float attachedCardsDistance = 0;
-    [HideInInspector] [SerializeField] private List<Vector3> cachedAttachedPositions = new List<Vector3>();
+    [HideInInspector][SerializeField] private float attachedCardsDistance = 0;
+    [HideInInspector][SerializeField] private List<Vector3> cachedAttachedPositions = new List<Vector3>();
 
     public void SetAttachedCardsDistance(float distance)
     {
@@ -26,6 +27,7 @@ public class SlotCardAttacher : MonoBehaviour
         bool succeedAttachingCard = false;
         if (CheckSlotConditions(card))
         {
+
             AttachCard(card);
             succeedAttachingCard = true;
         }
@@ -53,7 +55,7 @@ public class SlotCardAttacher : MonoBehaviour
     {
         if (!attachedCards.Contains(card))
         {
-             attachedCards.Add(card);
+            attachedCards.Add(card);
         }
         Transform cardTransform = card.transform;
         cardTransform.SetParent(transform);
@@ -63,6 +65,7 @@ public class SlotCardAttacher : MonoBehaviour
             new Vector3(cardTransform.localPosition.x, cardTransform.localPosition.y, 0 - lastIndex - 1);
         if (notifyEvents)
         {
+
             onAttachCard?.Invoke(card);
         }
         cachedAttachedPositions.Add(card.transform.position);
@@ -80,6 +83,7 @@ public class SlotCardAttacher : MonoBehaviour
 
     public void DeAttachCard(Card card, bool notifyEvents = true)
     {
+
         card.DecreasePriority();
 
         attachedCards.Remove(card);
