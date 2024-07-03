@@ -108,7 +108,7 @@ public class SolitaireCardGenerator : MonoBehaviour, IGameGenerator
             newCard.SetCardType(randomType);
             newCard.SetCardNumber(randomNumber);
             cards.Add(newCard);
-
+            newCard.gameObject.name = cardKey;
             existingCards.Add(cardKey);
         }
     }

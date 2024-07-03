@@ -34,12 +34,14 @@ public class SolitaireLayout : MonoBehaviour
         for (var i = 0; i < layoutInstantiatedSlots.Count; i++)
         {
             SlotCardAttacher layoutSlot = layoutInstantiatedSlots[i].GetComponent<SlotCardAttacher>();
-        
+            layoutSlot.SetAttachedCardsDistance(cardYSeparation);
             if(cards.Count > i && cards[i].Count > 0) 
             {
-                foreach (Card card in cards[i])
+                for (int j = 0; j < cards[i].Count; j++)
                 {
-                    layoutSlot.AttachCard(card);
+                    Card card = cards[i][j];
+                    layoutSlot.AttachCard(card); 
+
                 }
                 layoutSlot.CheckSlotConditions(cards[i].Last());
             }
