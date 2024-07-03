@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5981353207485521139}
+  - component: {fileID: 4164585280186124992}
   m_Layer: 0
   m_Name: PileOfCardsWithTwoSlots
   m_TagString: Untagged
@@ -33,6 +34,22 @@ Transform:
   - {fileID: 1672327273631203288}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4164585280186124992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778123317398381029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cdb8670732ebd7479d487fcaaaca53d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPileOfCards: []
+  currentShowingCard: -1
+  hidedPileSlot: {fileID: 2157929743947769429}
+  showedPileSlot: {fileID: 4417367786764910637}
 --- !u!1001 &2036795870445642885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41,6 +58,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5981353207485521139}
     m_Modifications:
+    - target: {fileID: 123469274909278928, guid: 46d3dd36280a2e2479d196238829a9bd, type: 3}
+      propertyPath: onAttachCard.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4164585280186124992}
     - target: {fileID: 890256707906314216, guid: 46d3dd36280a2e2479d196238829a9bd, type: 3}
       propertyPath: showedPileSlot
       value: 
@@ -89,20 +110,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: PilleOfCards
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 890256707906314216, guid: 46d3dd36280a2e2479d196238829a9bd, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46d3dd36280a2e2479d196238829a9bd, type: 3}
---- !u!114 &1161634927298427757 stripped
+--- !u!114 &2157929743947769429 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 890256707906314216, guid: 46d3dd36280a2e2479d196238829a9bd, type: 3}
+  m_CorrespondingSourceObject: {fileID: 123469274909278928, guid: 46d3dd36280a2e2479d196238829a9bd, type: 3}
   m_PrefabInstance: {fileID: 2036795870445642885}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cdb8670732ebd7479d487fcaaaca53d, type: 3}
+  m_Script: {fileID: 11500000, guid: b906b4768ee8dec4eb0d9e2601c7ef25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &4002127740107872672 stripped
@@ -169,15 +191,11 @@ PrefabInstance:
     - target: {fileID: -4100626401872241024, guid: dabc415263e5e34479bddcf1893e8899, type: 3}
       propertyPath: onAttachCard.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1161634927298427757}
+      objectReference: {fileID: 4164585280186124992}
     - target: {fileID: -4100626401872241024, guid: dabc415263e5e34479bddcf1893e8899, type: 3}
       propertyPath: onDeAttachCard.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1161634927298427757}
-    - target: {fileID: -4100626401872241024, guid: dabc415263e5e34479bddcf1893e8899, type: 3}
-      propertyPath: onDeAttachCard.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1161634927298427757}
+      objectReference: {fileID: 4164585280186124992}
     - target: {fileID: -4100626401872241024, guid: dabc415263e5e34479bddcf1893e8899, type: 3}
       propertyPath: onAttachCard.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
