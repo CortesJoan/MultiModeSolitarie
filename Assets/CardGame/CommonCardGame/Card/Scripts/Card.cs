@@ -15,6 +15,8 @@ public class Card : MonoBehaviour
     [SerializeField] private int currentPriority = 0;
     private const int maxPriority = 10;
     [SerializeField] private bool isShowed;
+    [SerializeField] Collider2D cardTrigger;
+
     public UnityEvent<CardType> onCardTypeChanged;
     public UnityEvent onCardHided;
     public UnityEvent onCardShowed;
@@ -24,9 +26,8 @@ public class Card : MonoBehaviour
     public UnityEvent<CardNumber> onCardNumberChanged;
     public UnityEvent<int> onPriorityIncreased;
     public UnityEvent<int> onPriorityDecreased;
- 
- 
 
+  
     public void Show()
     {
         isShowed = true;
@@ -135,6 +136,10 @@ public class Card : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         onCardTriggeredCollider?.Invoke(other);
+    }
+    public void ToggleCardTrigger(bool state) {
+     cardTrigger.enabled = state;
+    
     }
 }
 
