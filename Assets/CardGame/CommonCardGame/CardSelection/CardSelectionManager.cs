@@ -69,9 +69,19 @@ public class CardSelectionManager : MonoBehaviour
             Debug.Log(hit.collider.name, hit.collider.gameObject);
 
             List<ISelectionable> selectionables = hit.collider.GetComponentsInParent<ISelectionable>().ToList();
-            foreach (var iSelectionable in selectionables)
+            for (int i = 0; i < selectionables.Count; i++)
             {
-                iSelectionable.OnSelected(hit.collider.gameObject);
+                ISelectionable iSelectionable = selectionables[i];
+                if (iSelectionable.CanBeSelected(hit.collider.gameObject)) {
+                    iSelectionable.OnSelected(hit.collider.gameObject);
+                }
+                else
+                {
+                    selectionables.Remove(iSelectionable);
+                    i--;
+                }
+            
+            
             }
             if (selectionables.Count != 0)
             {
@@ -137,9 +147,16 @@ public class CardSelectionManager : MonoBehaviour
                     bool isAttached = slotCardAttacherTarget.TryToAttachCard(card);
                     if (isAttached)
                     {
-                        var showingCardUpdater = slotCardAttacherFrom.GetComponent<CurrentShowingCardUpdater>();
+                        //aqui creo algun tipo de notificador indicando que el owner a cambiado definitivamente
+                        var componentsToUpdate = slotCardAttacherFrom.GetComponentsInParent<ICardPlacedOnAnotherPlace>();
+                        foreach (var component in componentsToUpdate)
+                        {
+                            component.NotifyCardIsPlacedOnAnotherPlace(card);
+                        }
+                        
+                       // var showingCardUpdater = slotCardAttacherFrom.GetComponent<CurrentShowingCardUpdater>();
 
-                        showingCardUpdater?.ShowNewLastCard();
+                     //   showingCardUpdater?.ShowNewLastCard();
                         playerCardManager.UnSelectCard(card);
                         selectedCards.Remove(card);
                         index--;
@@ -187,4 +204,9 @@ public class CardSelectionManager : MonoBehaviour
 public interface ISelectionable
 {
     void OnSelected(GameObject selectedGameObject);
+    bool CanBeSelected(GameObject selectedGameObject);
+}
+public interface ICardPlacedOnAnotherPlace
+{
+    public void NotifyCardIsPlacedOnAnotherPlace(Card card);
 }
