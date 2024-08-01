@@ -18,9 +18,13 @@ public class SolitaireCardGeneratorEditor : Editor
         DrawDefaultInspector();
         if (GUILayout.Button("Generate Game"))
         {
-            Undo.RecordObject(solitaireCardGenerator,"Generate New Game");
+            Undo.RecordObject(solitaireCardGenerator, "Generate New Game");
             solitaireCardGenerator.GenerateGame();
             PrefabUtility.RecordPrefabInstancePropertyModifications(solitaireCardGenerator);
+        }
+        if (GUILayout.Button("Reset"))
+        {
+            solitaireCardGenerator.Clear();
         }
     }
 }
