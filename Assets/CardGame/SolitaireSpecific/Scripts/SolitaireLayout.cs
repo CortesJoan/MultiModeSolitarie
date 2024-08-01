@@ -35,12 +35,12 @@ public class SolitaireLayout : MonoBehaviour
         {
             SlotCardAttacher layoutSlot = layoutInstantiatedSlots[i].GetComponent<SlotCardAttacher>();
             layoutSlot.SetAttachedCardsDistance(cardYSeparation);
-            if(cards.Count > i && cards[i].Count > 0) 
+            if (cards.Count > i && cards[i].Count > 0)
             {
                 for (int j = 0; j < cards[i].Count; j++)
                 {
                     Card card = cards[i][j];
-                    layoutSlot.AttachCard(card); 
+                    layoutSlot.AttachCard(card);
 
                 }
                 layoutSlot.CheckSlotConditions(cards[i].Last());
@@ -78,6 +78,15 @@ public class SolitaireLayout : MonoBehaviour
         }
 
         return totalCards;
-        
+
+    }
+    public void ResetLayout()
+    {
+        for (int i = 0; i < layoutInstantiatedSlots.Count; i++)
+        {
+            SlotCardAttacher attacher = layoutInstantiatedSlots[i].GetComponent<SlotCardAttacher>();
+           
+            attacher.ResetSlot();
+        }
     }
 }
