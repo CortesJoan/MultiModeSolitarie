@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -95,7 +96,7 @@ public class SlotCardAttacher : MonoBehaviour
         Debug.Log($"Card deattached " + card.ToString() + " to " + transform.name);
         if (attachedCards.Count == 0)
         {
-            slotConditions = slotConditionsWhenNoCardsAttached.Select(cond => cond.Clone()).ToList();
+            RestoreDefaultConditions();
         }
         else
         {
@@ -106,6 +107,10 @@ public class SlotCardAttacher : MonoBehaviour
         }
     }
 
+    public void RestoreDefaultConditions()
+    {
+        slotConditions = slotConditionsWhenNoCardsAttached.Select(cond => cond.Clone()).ToList();
+    }
     public List<Card> GetAttachedCards()
     {
         return attachedCards;
@@ -130,5 +135,17 @@ public class SlotCardAttacher : MonoBehaviour
     public void ClearNulls()
     {
         attachedCards.RemoveAll(x => x == null);
+    }
+    public void ResetSlot()
+    {
+        ClearNulls();
+        for (int i = 0; i < attachedCards.Count; i++)
+        {
+            GameObject cardGameObject = attachedCards[i].gameObject;
+            DeAttachCard(attachedCards[i],false);
+            this.DestroyGameObjectInAnyContext(cardGameObject);
+            i--;
+        }
+
     }
 }
